@@ -37,9 +37,11 @@ public class JSONParser {
             HttpPost httpPost = new HttpPost(url);
             Log.v("mensaje", "POST"); 
             HttpResponse httpResponse = httpClient.execute(httpPost);
+            Log.v("mensaje", "response");
             HttpEntity httpEntity = httpResponse.getEntity();
+            Log.v("mensaje", "entity");
             is = httpEntity.getContent();  
-            Log.v("mensaje", "Entity"); 
+            Log.v("mensaje", "is"); 
  
         } catch (UnsupportedEncodingException e) {
         	Log.v("mensaje", "ERROR");
