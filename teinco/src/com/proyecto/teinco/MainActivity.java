@@ -4,6 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.proyecto.datos.Estudiante;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -47,16 +49,15 @@ public class MainActivity extends Activity {
 		
 		
 	}
-	public void procesar(JSONObject jsonObject)
+	public void procesar(JSONObject objeto)
 	{
 		this.progressDialog.dismiss();
-	    try {
-	    	JSONArray notas = jsonObject.getJSONArray("notas");
-	    	textView.setText(notas.getJSONObject(0).getString("descripcion"));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	    BD db = new BD(this);
+		db.cargar(objeto);
+		Estudiante e = db.getEstudiante();
+		if(e!=null)
+		this.textView.setText(e.toString());
+		else	this.textView.setText("Estudiante NULL");
 	}
 
 }

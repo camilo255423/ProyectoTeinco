@@ -22,7 +22,7 @@ public class Conexion extends AsyncTask<String, Void, JSONObject>{
 	}
 	
 	protected void onPostExecute(JSONObject resultado) {
-	//this.actividad.getProgressDialog().dismiss();	
+	
     		
 	this.actividad.procesar(resultado)	;
      
