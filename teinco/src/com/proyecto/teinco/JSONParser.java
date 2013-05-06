@@ -35,13 +35,10 @@ public class JSONParser {
         	
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
-            Log.v("mensaje", "POST"); 
             HttpResponse httpResponse = httpClient.execute(httpPost);
-            Log.v("mensaje", "response");
             HttpEntity httpEntity = httpResponse.getEntity();
-            Log.v("mensaje", "entity");
             is = httpEntity.getContent();  
-            Log.v("mensaje", "is"); 
+            
  
         } catch (UnsupportedEncodingException e) {
         	Log.v("mensaje", "ERROR");
@@ -53,15 +50,17 @@ public class JSONParser {
         	Log.v("mensaje", "ERROR");
             e.printStackTrace();
         }
+        catch (Exception e)
+        {
+        	Log.v("mensaje",e.getMessage());
+        }
          
         try {
-        	Log.v("mensaje", "Buffered");
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     is, "iso-8859-1"), 8);
             StringBuilder sb = new StringBuilder();
             String line = null;
             while ((line = reader.readLine()) != null) {
-            	Log.v("mensaje", "RECIBIENDO");
                 sb.append(line + "\n");
             }
             is.close();
@@ -75,6 +74,11 @@ public class JSONParser {
             jObj = new JSONObject(json);
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
+            Log.e("mensaje",e.toString());
+        }
+        catch(Exception e)
+        {
+        	Log.e("mensaje",e.toString());
         }
  
         // return JSON String

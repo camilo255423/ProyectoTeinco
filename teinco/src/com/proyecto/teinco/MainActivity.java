@@ -1,5 +1,7 @@
 package com.proyecto.teinco;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Bundle;
@@ -8,10 +10,12 @@ import android.app.ProgressDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private ProgressDialog progressDialog;
+    private TextView textView;
 	public ProgressDialog getProgressDialog() {
 		return progressDialog;
 	}
@@ -24,7 +28,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Log.v("mensaje","click");
+		this.textView = (TextView) this.findViewById(R.id.texto);
+		
 	
 	}
 
@@ -38,15 +43,20 @@ public class MainActivity extends Activity {
 	{
 		this.progressDialog = ProgressDialog.show(this,"Conectando al servidor", "por favor espere...");
 		Conexion c = new Conexion(this);
-		Log.v("mensaje","click");
 		c.execute(this.getResources().getString(R.string.servidor));
 		
 		
 	}
-	public void procesar(String jsonObject)
+	public void procesar(JSONObject jsonObject)
 	{
 		this.progressDialog.dismiss();
-		Toast.makeText(this, jsonObject, Toast.LENGTH_LONG).show();
+	    try {
+	    	JSONArray notas = jsonObject.getJSONArray("notas");
+	    	textView.setText(notas.getJSONObject(0).getString("descripcion"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
