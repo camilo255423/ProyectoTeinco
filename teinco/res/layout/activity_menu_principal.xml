@@ -1,0 +1,42 @@
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ff0000"
+    android:gravity="center_vertical"
+    tools:context=".MenuPrincipalActivity" >
+
+    <TableRow android:gravity="center_horizontal">
+        <TextView android:id="@+id/nombre_estudiante" android:text="ESTUDIANTE"/>
+        
+    </TableRow>
+    <TableRow android:gravity="center_horizontal">
+        <TextView android:id="@+id/nombre_programa" android:text="PROGRAMA"/>
+    </TableRow>
+    <TableRow android:paddingTop="14.15sp">
+    </TableRow>
+    <TableRow 
+        android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+        >
+          <Button android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/boton_notas"
+            />
+      
+    </TableRow>
+    <TableRow  android:gravity="center_horizontal">
+            <Button android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/boton_inscripcion"
+            android:gravity="center_horizontal"
+            />
+    </TableRow>
+
+    <TableRow>
+    </TableRow>
+
+</TableLayout>
