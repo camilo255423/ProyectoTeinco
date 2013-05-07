@@ -54,6 +54,8 @@ public class MainActivity extends Activity {
 		this.progressDialog.dismiss();
 	    BD db = new BD(this);
 		db.cargar(objeto);
+		Bundle b = new Bundle();
+		
 		Estudiante e = db.getEstudiante();
 		if(e!=null)
 		this.textView.setText(e.toString());

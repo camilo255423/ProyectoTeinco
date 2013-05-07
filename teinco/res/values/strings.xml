@@ -4,6 +4,11 @@
     <string name="app_name">Consulta de Notas</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Bienvenido</string>
-	<string name="servidor">http://www.epsilondx.com/teinco/</string>
-	<string name="boton_login">Aceptar</string>
+    <string name="servidor">http://www.epsilondx.com/teinco/</string>
+    <string name="boton_login">Aceptar</string>
+    <string name="boton_notas">Notas</string>
+    <string name="boton_inscripcion">Inscripción</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_menu_principal">MenuPrincipalActivity</string>
+
 </resources>
