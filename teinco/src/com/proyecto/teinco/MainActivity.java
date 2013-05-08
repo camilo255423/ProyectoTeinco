@@ -9,6 +9,7 @@ import com.proyecto.datos.Estudiante;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -53,13 +54,11 @@ public class MainActivity extends Activity {
 	{
 		this.progressDialog.dismiss();
 	    BD db = new BD(this);
+	    db.crear();
 		db.cargar(objeto);
-		Bundle b = new Bundle();
+	    Intent intent = new Intent(this,MenuPrincipalActivity.class);	
+	    this.startActivity(intent);
 		
-		Estudiante e = db.getEstudiante();
-		if(e!=null)
-		this.textView.setText(e.toString());
-		else	this.textView.setText("Estudiante NULL");
 	}
 
 }

@@ -1,8 +1,11 @@
 package com.proyecto.teinco;
 
+import com.proyecto.datos.Estudiante;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.TextView;
 
 public class MenuPrincipalActivity extends Activity {
 
@@ -10,6 +13,12 @@ public class MenuPrincipalActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu_principal);
+		TextView tvNombre = (TextView) this.findViewById(R.id.nombre_estudiante);
+		TextView tvPrograma = (TextView) this.findViewById(R.id.nombre_programa);
+		BD db = new BD(this);
+		Estudiante estudiante = db.getEstudiante();
+		tvNombre.setText(estudiante.getNombres()+" "+estudiante.getApellido1()+" "+estudiante.getApellido2());
+		tvPrograma.setText(estudiante.getPrograma());
 	}
 
 	@Override

@@ -48,6 +48,10 @@ public class BD extends SQLiteOpenHelper {
 	public BD(Context context) {
 		super(context, NOMBRE_BD, null, VERSION_BD);
 		// TODO Auto-generated constructor stub
+		
+	}
+	public void crear()
+	{
 		this.onUpgrade(this.getReadableDatabase(), 1, 1);
 	}
 
