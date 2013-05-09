@@ -19,7 +19,9 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
     private ProgressDialog progressDialog;
     private TextView textView;
+ 
 	public ProgressDialog getProgressDialog() {
+		
 		return progressDialog;
 	}
 

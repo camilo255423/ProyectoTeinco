@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.proyecto.datos.Estudiante;
+import com.proyecto.datos.Horario;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -210,6 +211,29 @@ public class BD extends SQLiteOpenHelper {
         }
 		
 		return estudiante;
+	}
+	public ArrayList<Horario> getHorario(int id_dia)
+	{
+		ArrayList<Horario> horarios = new ArrayList<Horario>();
+		String selectQuery = "SELECT  * FROM " + this.TABLA_HORARIO+" WHERE "+this.HORARIO_ID_DIA
+		+"="+id_dia+ " ORDER BY "+this.HORARIO_ID_HORA+ " ASC ";
+		 
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+ 
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Horario horario = new Horario();
+                horario.setAsignatura(cursor.getString(cursor.getColumnIndex(this.HORARIO_ASIGNATURA)));
+                horario.setHora(cursor.getString(cursor.getColumnIndex(this.HORARIO_HORA)));
+                horario.setIdDia(cursor.getString(cursor.getColumnIndex(this.HORARIO_ID_DIA)));
+                horario.setSalon(cursor.getString(cursor.getColumnIndex(this.HORARIO_SALON)));
+                horarios.add(horario);
+            } while (cursor.moveToNext());
+        }
+		
+		return horarios;
 	}
 
 }
