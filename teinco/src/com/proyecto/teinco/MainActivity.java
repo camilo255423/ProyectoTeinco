@@ -35,6 +35,9 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		this.textView = (TextView) this.findViewById(R.id.texto);
 		
+	 // Intent intent = new Intent(this,MainHorariosActivity.class);	
+		//    this.startActivity(intent);
+
 	
 	}
 
@@ -58,7 +61,7 @@ public class MainActivity extends Activity {
 	    BD db = new BD(this);
 	    db.crear();
 		db.cargar(objeto);
-	    Intent intent = new Intent(this,MenuPrincipalActivity.class);	
+	    Intent intent = new Intent(this,MainHorariosActivity.class);	
 	    this.startActivity(intent);
 		
 	}
