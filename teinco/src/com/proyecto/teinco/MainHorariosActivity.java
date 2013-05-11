@@ -109,7 +109,7 @@ public class MainHorariosActivity extends Activity implements OnItemSelectedList
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int dia,
 			long arg3) {
 		Log.v("spinner","selected");
-		this.cargarHorario(dia);
+		this.cargarHorario(dia+1);
 		
 	}
 	@Override
