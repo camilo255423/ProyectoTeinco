@@ -4,15 +4,22 @@
     <string name="app_name">Consulta de Notas</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Bienvenido</string>
-    <string name="servidor">http://www.epsilondx.com/teinco/</string>
+    <string name="servidor">http://www.epsilondx.com/teinco/index.php?r=movil/solicitar</string>
     <string name="boton_login">Aceptar</string>
     <string name="boton_notas">Notas</string>
     <string name="boton_aceptar">Aceptar</string>
-    <string name="boton_inscripcion">Inscripción</string>
+    <string name="boton_inscripcion">Horarios</string>
     <string name="menu_settings">Settings</string>
     <string name="texto_spinner_dias">Dia: </string>
-    <string name="title_activity_menu_principal">MenuPrincipalActivity</string>
-    <string name="title_activity_main_horarios">MainHorariosActivity</string>
+    <string name="texto_spinner_asignaturas">Asignaturas: </string>
+    <string name="texto_spinner_corte">Corte: </string>
+    <string name="texto_titulo">Sistema de Consulta de Notas</string>
+    <string name="texto_usuario">usuario</string>
+    <string name="texto_clave">contraseña</string>
+    <string name="title_activity_menu_principal">Consulta de Horario y Notas</string>
+    <string name="title_activity_main_horarios">Horario</string>
+    <string name="title_activity_main_notas">Consulta de Notas</string>
+
     <string-array name="dias">
         <item>Lunes</item>
         <item>Martes</item>
@@ -21,5 +28,14 @@
         <item>Viernes</item>
         <item>Sábado</item>
     </string-array>
+     <string-array name="cortes">
+        <item>Primer Corte</item>
+        <item>Segundo Corte</item>
+        <item>Tercer Corte</item>
+    </string-array>
+
+    
+
+    <string name="texto_salir">Salir</string>
 
 </resources>

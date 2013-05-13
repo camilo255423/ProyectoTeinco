@@ -1,10 +1,13 @@
 package com.proyecto.teinco;
 
+import java.security.NoSuchAlgorithmException;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.proyecto.datos.Estudiante;
+import com.proyecto.seguridad.Codificador;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -13,13 +16,33 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
     private ProgressDialog progressDialog;
-    private TextView textView;
+    private EditText user;
+    private EditText password;
+    
  
+	
+	public EditText getUser() {
+		return user;
+	}
+
+	public void setUser(EditText user) {
+		this.user = user;
+	}
+
+	public EditText getPassword() {
+		return password;
+	}
+
+	public void setPassword(EditText password) {
+		this.password = password;
+	}
+
 	public ProgressDialog getProgressDialog() {
 		
 		return progressDialog;
@@ -33,11 +56,9 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		this.textView = (TextView) this.findViewById(R.id.texto);
-		
-	 // Intent intent = new Intent(this,MainHorariosActivity.class);	
-		//    this.startActivity(intent);
-
+		this.user = (EditText) this.findViewById(R.id.editUser);
+		this.password = (EditText) this.findViewById(R.id.editPassword);
+	 
 	
 	}
 
@@ -54,14 +75,15 @@ public class MainActivity extends Activity {
 		c.execute(this.getResources().getString(R.string.servidor));
 		
 		
+		
 	}
 	public void procesar(JSONObject objeto)
 	{
-		this.progressDialog.dismiss();
+		
 	    BD db = new BD(this);
 	    db.crear();
 		db.cargar(objeto);
-	    Intent intent = new Intent(this,MainHorariosActivity.class);	
+	    Intent intent = new Intent(this,MenuPrincipalActivity.class);	
 	    this.startActivity(intent);
 		
 	}

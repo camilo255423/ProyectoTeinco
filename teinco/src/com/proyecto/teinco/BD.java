@@ -6,8 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.proyecto.datos.Asignatura;
 import com.proyecto.datos.Estudiante;
 import com.proyecto.datos.Horario;
+import com.proyecto.datos.Nota;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,6 +27,7 @@ public class BD extends SQLiteOpenHelper {
 	private final String TABLA_ESTUDIANTE = "estudiante";
 	private final String TABLA_HORARIO = "horario";
 	private final String TABLA_NOTAS = "notas";
+	private final String TABLA_ASIGNATURA = "asignatura";
 	//CAMPOS TABLA ESTUDIANTE
 	private final String ESTUDIANTE_NOMBRES = "nombres"; 
 	private final String ESTUDIANTE_APELLIDO1 = "apellido1";
@@ -46,6 +49,15 @@ public class BD extends SQLiteOpenHelper {
 		private  final String NOTAS_CORTE = "corte";
 		private  final String NOTAS_DESCRIPCION = "descripcion";
 		private  final String NOTAS_NOTA = "nota";
+		
+		//CAMPOS TABLA ASIGNATURA	
+				private  final String ASIGNATURA_CODIGO_ASIGNATURA = "codigo_asignatura";
+				private  final String ASIGNATURA_ASIGNATURA = "nombre";
+				private  final String ASIGNATURA_NOTA_CORTE1 ="nota_corte_1";
+				private  final String ASIGNATURA_NOTA_CORTE2 ="nota_corte_2";
+				private  final String ASIGNATURA_NOTA_CORTE3 ="nota_corte_3";
+				private  final String ASIGNATURA_NOTA_FINAL ="nota_final";
+				
 	public BD(Context context) {
 		super(context, NOMBRE_BD, null, VERSION_BD);
 		// TODO Auto-generated constructor stub
@@ -86,7 +98,16 @@ public class BD extends SQLiteOpenHelper {
 					    + this.NOTAS_NOTA + " REAL"
 		                + ")";
 		        db.execSQL(CREATE_TABLE_NOTAS);
-		
+		        
+		        String CREATE_TABLE_ASIGNATURA = "CREATE TABLE " + this.TABLA_ASIGNATURA + "("
+		                + this.ASIGNATURA_CODIGO_ASIGNATURA + " TEXT," 
+					    + this.ASIGNATURA_ASIGNATURA + " TEXT,"
+					    + this.ASIGNATURA_NOTA_CORTE1 + " REAL,"
+					    + this.ASIGNATURA_NOTA_CORTE2 + " REAL,"
+					    + this.ASIGNATURA_NOTA_CORTE3 + " REAL,"
+					    + this.ASIGNATURA_NOTA_FINAL + " REAL"
+		                + ")";
+		        db.execSQL(CREATE_TABLE_ASIGNATURA);
 	}
 
 	@Override
@@ -95,7 +116,7 @@ public class BD extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + this.TABLA_ESTUDIANTE);
         db.execSQL("DROP TABLE IF EXISTS " + this.TABLA_HORARIO);
         db.execSQL("DROP TABLE IF EXISTS " + this.TABLA_NOTAS);
- 
+        db.execSQL("DROP TABLE IF EXISTS " + this.TABLA_ASIGNATURA);
         // CREA BASE DE DATOS NUEVAMENTE
         onCreate(db);
 		
@@ -158,15 +179,15 @@ public class BD extends SQLiteOpenHelper {
 		    try {
 				valores.put(this.NOTAS_ASIGNATURA, objeto.getString(this.HORARIO_ASIGNATURA));
 				valores.put(this.NOTAS_CODIGO_ASIGNATURA, objeto.getString(this.HORARIO_CODIGO_ASIGNATURA)); 
-			    valores.put(this.NOTAS_CORTE, objeto.getString(this.HORARIO_DIA));
-			    valores.put(this.NOTAS_DESCRIPCION, objeto.getString(this.HORARIO_HORA));
-			    valores.put(this.NOTAS_NOTA, objeto.getString(this.HORARIO_ID_DIA));
+			    valores.put(this.NOTAS_CORTE, objeto.getString(this.NOTAS_CORTE));
+			    valores.put(this.NOTAS_DESCRIPCION, objeto.getString(this.NOTAS_DESCRIPCION));
+			    valores.put(this.NOTAS_NOTA, objeto.getString(this.NOTAS_NOTA));
 			    long filas=db.insert(this.TABLA_NOTAS, null, valores);
-			    Log.v("base", "numero filas estudiante"+filas);
+			    Log.v("base", "numero filas notas"+filas);
 			    
 		    } catch (JSONException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+		    	Log.v("base",e.getMessage());
 			}
 		    catch(Exception e){
 		    	Log.v("base",e.getMessage());
@@ -175,18 +196,52 @@ public class BD extends SQLiteOpenHelper {
 	    
 	    
 	}
+	    public void adicionarAsignatura(JSONObject objeto)
+			{
+				SQLiteDatabase db = this.getWritableDatabase();
+				 
+			    ContentValues valores = new ContentValues();
+			    try {
+					valores.put(this.ASIGNATURA_ASIGNATURA, objeto.getString(this.ASIGNATURA_ASIGNATURA));
+					valores.put(this.ASIGNATURA_CODIGO_ASIGNATURA, objeto.getString(this.ASIGNATURA_CODIGO_ASIGNATURA)); 
+					valores.put(this.ASIGNATURA_NOTA_CORTE1, objeto.getString(this.ASIGNATURA_NOTA_CORTE1));
+					valores.put(this.ASIGNATURA_NOTA_CORTE2, objeto.getString(this.ASIGNATURA_NOTA_CORTE2));
+					valores.put(this.ASIGNATURA_NOTA_CORTE3, objeto.getString(this.ASIGNATURA_NOTA_CORTE3));
+					valores.put(this.ASIGNATURA_NOTA_FINAL, objeto.getString(this.ASIGNATURA_NOTA_FINAL));
+					long filas=db.insert(this.TABLA_ASIGNATURA, null, valores);
+				    Log.v("base", "numero filas asignatura"+filas);
+				    
+			    } catch (JSONException e) {
+					// TODO Auto-generated catch block
+			    	Log.v("base",e.getMessage());
+				}
+			    catch(Exception e){
+			    	Log.v("base",e.getMessage());
+			    }
+		    
+		    
+		    
+		}
 	public void cargar(JSONObject objeto)
 	{
 		Log.v("base","cargando json");
 		  try {
 			  JSONObject estudiante = objeto.getJSONObject("estudiante");
 			  JSONArray horario = objeto.getJSONArray("horario");
-			  Log.v("base", horario.toString());
-			  Log.v("base", "tamaño horario"+horario.length());
-			  Log.v("base", "tamaño horario"+horario.getJSONObject(0));
+			  JSONArray asignaturas = objeto.getJSONArray("asignaturas");
+			  JSONArray notas = objeto.getJSONArray("notas");
+			
 			  for(int i=0;i<horario.length();i++ )
 			  {
 				  this.adicionarHorario(horario.getJSONObject(i));
+			  }
+			  for(int i=0;i<asignaturas.length();i++ )
+			  {
+				  this.adicionarAsignatura(asignaturas.getJSONObject(i));
+			  }
+			  for(int i=0;i<notas.length();i++ )
+			  {
+				  this.adicionarNotas(notas.getJSONObject(i));
 			  }
 			  
 			  this.adicionarEstudiante(estudiante);
@@ -245,6 +300,57 @@ public class BD extends SQLiteOpenHelper {
         }
 		
 		return horarios;
+	}
+	public ArrayList<Asignatura> getAsignaturas()
+	{
+		ArrayList<Asignatura> asignaturas = new ArrayList<Asignatura>();
+		String selectQuery = "SELECT  * FROM " + this.TABLA_ASIGNATURA
+		+ " ORDER BY "+this.ASIGNATURA_ASIGNATURA+ " ASC ";
+		SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+ 
+        
+        if (cursor.moveToFirst()) {
+            do {
+                Asignatura asignatura = new Asignatura();
+                asignatura.setAsignatura(cursor.getString(cursor.getColumnIndex(this.ASIGNATURA_ASIGNATURA)));
+                asignatura.setCodigoAsignatura(cursor.getString(cursor.getColumnIndex(this.ASIGNATURA_CODIGO_ASIGNATURA)));
+                asignatura.setNotaCorte1(cursor.getDouble(cursor.getColumnIndex(this.ASIGNATURA_NOTA_CORTE1)));
+                asignatura.setNotaCorte2(cursor.getDouble(cursor.getColumnIndex(this.ASIGNATURA_NOTA_CORTE2)));
+                asignatura.setNotaCorte3(cursor.getDouble(cursor.getColumnIndex(this.ASIGNATURA_NOTA_CORTE3)));
+                asignatura.setDefinitiva(cursor.getDouble(cursor.getColumnIndex(this.ASIGNATURA_NOTA_FINAL)));
+                
+                asignaturas.add(asignatura);
+                
+            } while (cursor.moveToNext());
+        }
+		Log.v("base", asignaturas.toString());
+		return asignaturas;
+	}
+	public ArrayList<Nota> getNotas(String codigoAsignatura, String corte)
+	{
+		ArrayList<Nota> notas = new ArrayList<Nota>();
+		String selectQuery = "SELECT  * FROM " + this.TABLA_NOTAS
+		+ " WHERE "+this.NOTAS_CODIGO_ASIGNATURA+" = "+	codigoAsignatura	
+		+ " AND "+this.NOTAS_CORTE + " = "+ corte;
+		SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+ 
+        
+        if (cursor.moveToFirst()) {
+            do {
+                Nota nota = new Nota();
+                nota.setAsignatura(cursor.getString(cursor.getColumnIndex(this.NOTAS_ASIGNATURA)));
+                nota.setCodigoAsignatura(cursor.getString(cursor.getColumnIndex(this.NOTAS_CODIGO_ASIGNATURA)));
+                nota.setCorte(cursor.getString(cursor.getColumnIndex(this.NOTAS_CORTE)));
+                nota.setDescripcion(cursor.getString(cursor.getColumnIndex(this.NOTAS_DESCRIPCION)));
+                nota.setNota(cursor.getDouble(cursor.getColumnIndex(this.NOTAS_NOTA)));
+                notas.add(nota);
+                
+            } while (cursor.moveToNext());
+        }
+		
+		return notas;
 	}
 
 }

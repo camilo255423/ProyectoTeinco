@@ -6,18 +6,93 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:background="@drawable/fondo6"
+ 
     tools:context=".MainActivity" >
+    <LinearLayout 
+     android:layout_width="match_parent"
+     android:layout_height="match_parent" 
+     android:orientation="vertical"
+     android:gravity="center_horizontal"
+    >
+    <LinearLayout 
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content" 
+     android:orientation="horizontal"
+     android:gravity="center_horizontal"
+    >
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_launcher"
+    android:layout_gravity="top"
+     />
+    
+</LinearLayout>
+    
+    <LinearLayout 
+    android:layout_width="match_parent"
+        android:layout_height="wrap_content"    
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        
+        >
 
     <TextView
-        android:id="@+id/texto"
+        android:id="@string/texto_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:gravity="center_horizontal"
+        android:text="@string/texto_titulo"
+        android:textColor="#104897"
+        android:textSize="22sp" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@string/texto_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/texto_usuario" />
+    <LinearLayout 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content" 
+     android:background="#22043170"
+    >
+    <EditText
+        android:id="@+id/editUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+    </LinearLayout>
+ <TextView
+        android:id="@string/texto_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/texto_clave" />
+<LinearLayout 
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content" 
+    android:background="#22043170"
+    >
+ <EditText
+     android:id="@+id/editPassword"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:ems="10"
+     android:inputType="textPassword" />
+    </LinearLayout>
     <Button 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/boton_login"
         android:onClick="clickLogin"
         />
-
+</LinearLayout>
 </LinearLayout>

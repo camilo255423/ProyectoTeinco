@@ -32,6 +32,10 @@
             android:name="com.proyecto.teinco.MainHorariosActivity"
             android:label="@string/title_activity_main_horarios" >
         </activity>
+        <activity
+            android:name="com.proyecto.teinco.MainNotasActivity"
+            android:label="@string/title_activity_main_notas" >
+        </activity>
     </application>
 
 </manifest>

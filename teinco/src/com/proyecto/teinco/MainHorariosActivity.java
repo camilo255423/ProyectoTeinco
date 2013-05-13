@@ -38,19 +38,24 @@ public class MainHorariosActivity extends Activity implements OnItemSelectedList
 		
 	    
 		db = new BD(this);
+		TextView tvNombre = (TextView) this.findViewById(R.id.nombre_estudiante);
+		TextView tvPrograma = (TextView) this.findViewById(R.id.nombre_programa);
+		TextView tvSemestre = (TextView) this.findViewById(R.id.semestre);
 		
+		Estudiante estudiante = db.getEstudiante();
+		tvNombre.setText(estudiante.getNombres()+" "+estudiante.getApellido1()+" "+estudiante.getApellido2());
+		tvPrograma.setText(estudiante.getPrograma());
+		tvSemestre.setText("Semestre "+estudiante.getSemestre());
 	    
 
 		
 	}
 	public void cargarHorario (int dia)
 	{
-		tabla.removeAllViews();
+		
+		tabla.removeViews(1, tabla.getChildCount()-1);
 	    ArrayList<Horario> horarios = db.getHorario(dia);
-	    Estudiante e = db.getEstudiante();
-	    Log.v("tabla",e.getNombres());
-	    Log.v("tabla",(horarios.size())+"");
-	    
+	     
 	    for (Horario horario:horarios )
 	    {
 	    	fila = new TableRow(this);
@@ -60,25 +65,22 @@ public class MainHorariosActivity extends Activity implements OnItemSelectedList
 	    	
 	    	TextView labelTV = new TextView(this);
 	        labelTV.setText(horario.getHora());
-	        labelTV.setTextColor(Color.RED);
 	        this.setCeldaBackground(labelTV);
 	        fila.addView(labelTV);	
 			
 	        labelTV = new TextView(this);
 		        labelTV.setText(horario.getAsignatura());
-		        labelTV.setTextColor(Color.RED);
 		        this.setCeldaBackground(labelTV);
 		        fila.addView(labelTV);	
 				
 		        
 		        labelTV = new TextView(this);
 			        labelTV.setText(horario.getSalon());
-			        labelTV.setTextColor(Color.RED);
 			        this.setCeldaBackground(labelTV);
 			        fila.addView(labelTV);	
 					
 			        tabla.addView(fila, new TableLayout.LayoutParams(
-		                    LayoutParams.MATCH_PARENT,
+		                    LayoutParams.WRAP_CONTENT,
 		                    LayoutParams.WRAP_CONTENT));
 	    }
 	    
@@ -94,7 +96,7 @@ public class MainHorariosActivity extends Activity implements OnItemSelectedList
         }
         labelTV.setLayoutParams(new LayoutParams(
                 LayoutParams.MATCH_PARENT,
-                LayoutParams.WRAP_CONTENT,0.3f));
+                LayoutParams.MATCH_PARENT));
         
         
         
