@@ -10,6 +10,7 @@ import com.proyecto.seguridad.Codificador;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
 
 public class Conexion extends AsyncTask<String, Void, JSONObject>{
@@ -38,7 +39,9 @@ public class Conexion extends AsyncTask<String, Void, JSONObject>{
 		try {
 			if (resultado.getInt("error")==1)
 			{
-				Toast.makeText(this.actividad, "Usuario o Contraseña no Válida", Toast.LENGTH_LONG).show();
+				Toast toast = Toast.makeText(this.actividad, "Usuario o Contraseña no Válida", Toast.LENGTH_LONG);
+				toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
+				toast.show();
 				this.actividad.getPassword().setText("");
 			}
 			else
