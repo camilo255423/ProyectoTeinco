@@ -65,18 +65,18 @@ public class MainHorariosActivity extends Activity implements OnItemSelectedList
 	    	
 	    	TextView labelTV = new TextView(this);
 	        labelTV.setText(horario.getHora());
-	        this.setCeldaBackground(labelTV);
+	        this.setCeldaBackground(labelTV,2f);
 	        fila.addView(labelTV);	
 			
 	        labelTV = new TextView(this);
 		        labelTV.setText(horario.getAsignatura());
-		        this.setCeldaBackground(labelTV);
+		        this.setCeldaBackground(labelTV,4f);
 		        fila.addView(labelTV);	
 				
 		        
 		        labelTV = new TextView(this);
 			        labelTV.setText(horario.getSalon());
-			        this.setCeldaBackground(labelTV);
+			        this.setCeldaBackground(labelTV,4f);
 			        fila.addView(labelTV);	
 					
 			        tabla.addView(fila, new TableLayout.LayoutParams(
@@ -85,7 +85,7 @@ public class MainHorariosActivity extends Activity implements OnItemSelectedList
 	    }
 	    
 	}
-    public void setCeldaBackground(TextView labelTV)
+    public void setCeldaBackground(TextView labelTV, float longitud)
     {
     	int sdk = android.os.Build.VERSION.SDK_INT;
         if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
@@ -95,7 +95,7 @@ public class MainHorariosActivity extends Activity implements OnItemSelectedList
         	labelTV.setBackground(this.getResources().getDrawable(R.drawable.celda_cuerpo));
         }
         labelTV.setLayoutParams(new LayoutParams(
-                LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT,
                 LayoutParams.MATCH_PARENT));
         
         
