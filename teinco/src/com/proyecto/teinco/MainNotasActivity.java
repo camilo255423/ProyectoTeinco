@@ -54,9 +54,10 @@ public class MainNotasActivity extends Activity implements  OnItemSelectedListen
 		tvSemestre.setText("Semestre "+estudiante.getSemestre());
 		
 		asignaturas = db.getAsignaturas();
-		
+		// Verifica que haya asignaturas inscritas
 		if(asignaturas.size()==0)
 		{
+			
 			Toast toast = Toast.makeText(this, "El usuario no tiene Asignaturas inscritas", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
 			toast.show();
