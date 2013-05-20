@@ -37,6 +37,7 @@ public class MainNotasActivity extends Activity implements  OnItemSelectedListen
 	TableLayout tabla;
     TableRow fila;
     TextView tvDefinitiva;
+    TextView tvCorte;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,6 +70,7 @@ public class MainNotasActivity extends Activity implements  OnItemSelectedListen
 		spinnerCorte = (Spinner) this.findViewById(R.id.spinner_corte);
 		tabla=(TableLayout) this.findViewById(R.id.tabla);
 		tvDefinitiva = (TextView) this.findViewById(R.id.nota_definitiva);
+		tvCorte = (TextView) this.findViewById(R.id.nota_corte);
 		
 		this.adaptador = new ArrayAdapter(this,android.R.layout.simple_spinner_item, this.getNombresAsignaturas(asignaturas));
 		
@@ -94,6 +96,8 @@ public class MainNotasActivity extends Activity implements  OnItemSelectedListen
 	}
 	private void cargarNotas()
 	{
+		double notacorte=0;
+		double notadefinitiva=0;
 		tabla.removeViews(1, tabla.getChildCount()-1);
 		int indexAsignatura = this.spinnerAsignatura.getSelectedItemPosition();
 		int indexCorte = this.spinnerCorte.getSelectedItemPosition();
@@ -124,25 +128,60 @@ public class MainNotasActivity extends Activity implements  OnItemSelectedListen
 		                    LayoutParams.MATCH_PARENT,
 		                    LayoutParams.WRAP_CONTENT));
 	    }
+	    
+	    if((indexCorte+1)==1) 
+	    {	
+	    
+	    notacorte = this.asignaturas.get(indexAsignatura).getNotaCorte1();
+	    	
+	    }
+	    if((indexCorte+1)==2) 
+	    {	
+	    
+	    notacorte = this.asignaturas.get(indexAsignatura).getNotaCorte2();
+	    	
+	    }
 	    if((indexCorte+1)==3) 
 	    {	
-	    this.tvDefinitiva.setVisibility(TextView.VISIBLE);
-	    double nota = this.asignaturas.get(indexAsignatura).getDefinitiva();
-	    	if(nota<3)
-	    	{
-	    		this.tvDefinitiva.setTextColor(Color.RED);
-	    	}
-	    	else
-	    	{
-	    		this.tvDefinitiva.setTextColor(Color.rgb(0, 129, 45));
-	    	}
-	    this.tvDefinitiva.setText("Definitiva: "+nota+"");	
+	    
+	    notacorte = this.asignaturas.get(indexAsignatura).getNotaCorte3();
+	    	
+	    }
+	    if((indexCorte+1)==3) 
+	    {	
+	    
+	    notadefinitiva = this.asignaturas.get(indexAsignatura).getDefinitiva();
+	    	
+	    }
+	    if(notacorte<3)
+    	{
+    		this.tvCorte.setTextColor(Color.RED);
+    	}
+    	else
+    	{
+    		this.tvCorte.setTextColor(Color.rgb(0, 129, 45));
+    	}
+	    if((indexCorte+1)==3) 
+	    {	
+	    
+	    notadefinitiva = this.asignaturas.get(indexAsignatura).getDefinitiva();
+	    if(notadefinitiva<3)
+    	{
+    		this.tvDefinitiva.setTextColor(Color.RED);
+    	}
+    	else
+    	{
+    		this.tvDefinitiva.setTextColor(Color.rgb(0, 129, 45));
+    	}
+	    this.tvDefinitiva.setText(" Definitiva: "+notadefinitiva+" ");	
 	    }
 	    else
 	    {
-	    this.tvDefinitiva.setVisibility(TextView.INVISIBLE);
+	    	this.tvDefinitiva.setText("");		
 	    }
 	    
+	    
+    this.tvCorte.setText("Corte: "+notacorte+" ");		
 	    
 	    
 	}

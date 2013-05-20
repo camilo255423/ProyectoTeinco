@@ -123,7 +123,7 @@ public class BD extends SQLiteOpenHelper {
 	}
 	public void adicionarEstudiante(JSONObject objeto)
 	{
-		Log.v("base","adicionar estudiante");
+		
 		SQLiteDatabase db = this.getWritableDatabase();
 		 
 	    ContentValues valores = new ContentValues();
@@ -133,11 +133,8 @@ public class BD extends SQLiteOpenHelper {
 		    valores.put(this.ESTUDIANTE_NOMBRES, objeto.getString(this.ESTUDIANTE_NOMBRES));
 		    valores.put(this.ESTUDIANTE_SEMESTRE, objeto.getString(this.ESTUDIANTE_SEMESTRE));
 		    valores.put(this.ESTUDIANTE_PROGRAMA, objeto.getString(this.ESTUDIANTE_PROGRAMA));
-		    Log.v("base","antes de insertar");
 		    long filas=db.insert(this.TABLA_ESTUDIANTE, null, valores);
-		    Log.v("base","despues de insertar");
-		    Log.v("base", "numero filas"+filas);
-	    } catch (JSONException e) {
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 	    	Log.v("base",e.getMessage());
 		} 
@@ -149,8 +146,7 @@ public class BD extends SQLiteOpenHelper {
 	public void adicionarHorario(JSONObject objeto)
 	{
 		SQLiteDatabase db = this.getWritableDatabase();
-		Log.v("base", "adicionando horario"); 
-	    ContentValues valores = new ContentValues();
+		ContentValues valores = new ContentValues();
 	    try {
 	    	
 			valores.put(this.HORARIO_ASIGNATURA, objeto.getString(this.HORARIO_ASIGNATURA));
@@ -161,9 +157,7 @@ public class BD extends SQLiteOpenHelper {
 		    valores.put(this.HORARIO_ID_HORA, objeto.getString(this.HORARIO_ID_HORA));
 		    valores.put(this.HORARIO_SALON, objeto.getString(this.HORARIO_SALON));
 		    long filas=db.insert(this.TABLA_HORARIO, null, valores);
-		    Log.v("base","despues de insertar");
-		    Log.v("base", "numero filas horario"+filas);
-	    } catch (JSONException e) {
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 	    	Log.v("base",e.getMessage());
 		}
@@ -183,7 +177,6 @@ public class BD extends SQLiteOpenHelper {
 			    valores.put(this.NOTAS_DESCRIPCION, objeto.getString(this.NOTAS_DESCRIPCION));
 			    valores.put(this.NOTAS_NOTA, objeto.getString(this.NOTAS_NOTA));
 			    long filas=db.insert(this.TABLA_NOTAS, null, valores);
-			    Log.v("base", "numero filas notas"+filas);
 			    
 		    } catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -209,7 +202,6 @@ public class BD extends SQLiteOpenHelper {
 					valores.put(this.ASIGNATURA_NOTA_CORTE3, objeto.getString(this.ASIGNATURA_NOTA_CORTE3));
 					valores.put(this.ASIGNATURA_NOTA_FINAL, objeto.getString(this.ASIGNATURA_NOTA_FINAL));
 					long filas=db.insert(this.TABLA_ASIGNATURA, null, valores);
-				    Log.v("base", "numero filas asignatura"+filas);
 				    
 			    } catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -224,7 +216,6 @@ public class BD extends SQLiteOpenHelper {
 		}
 	public void cargar(JSONObject objeto)
 	{
-		Log.v("base","cargando json");
 		  try {
 			  JSONObject estudiante = objeto.getJSONObject("estudiante");
 			  JSONArray horario = objeto.getJSONArray("horario");
@@ -324,7 +315,6 @@ public class BD extends SQLiteOpenHelper {
                 
             } while (cursor.moveToNext());
         }
-		Log.v("base", asignaturas.toString());
 		return asignaturas;
 	}
 	public ArrayList<Nota> getNotas(String codigoAsignatura, String corte)
